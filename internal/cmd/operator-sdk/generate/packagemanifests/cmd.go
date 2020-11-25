@@ -60,13 +60,6 @@ func NewCmd() *cobra.Command {
 				return fmt.Errorf("command %s doesn't accept any arguments", cmd.CommandPath())
 			}
 
-<<<<<<< HEAD
-			cfg, err := projutil.ReadConfig()
-			if err != nil {
-				log.Fatal(fmt.Errorf("error reading configuration: %v", err))
-			}
-=======
->>>>>>> dee3d8bc1869d8aeecb9966af9fc1ad22c8373bf
 			if err := c.setDefaults(); err != nil {
 				return err
 			}

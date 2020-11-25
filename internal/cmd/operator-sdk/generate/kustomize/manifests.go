@@ -26,7 +26,7 @@ import (
 	"github.com/spf13/pflag"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/util/validation"
-	"sigs.k8s.io/kubebuilder/pkg/model/config"
+
 	"sigs.k8s.io/kubebuilder/v2/pkg/model/config"
 	"sigs.k8s.io/yaml"
 
@@ -216,31 +216,6 @@ func (c manifestsCmd) run(cfg *config.Config) error {
 	if err = ioutil.WriteFile(basePath, csvBytes, 0644); err != nil {
 		return fmt.Errorf("error writing CSV base: %v", err)
 	}
-
-	/*
-		basePath := filepath.Join(c.outputDir, "bases", cfg.ProjectName+".clusterserviceversion.yaml")
-
-		base := bases.ClusterServiceVersion{
-			BasePath:     basePath,
-			OperatorName: c.projectName,
-			OperatorType: projutil.PluginKeyToOperatorType(cfg.Layout),
-			APIsDir:      c.apisDir,
-			Interactive:  isInteractive(c.interactiveLevel),
-			GVKs:         getGVKs(cfg),
-		}
-		csv, err := base.GetBase()
-		if err != nil {
-			return fmt.Errorf("error getting ClusterServiceVersion base: %v", err)
-		}
-
-		csvBytes, err := yaml.Marshal(csv)
-		if err != nil {
-			return fmt.Errorf("error marshaling CSV base: %v", err)
-		}
-		if err = ioutil.WriteFile(basePath, csvBytes, 0644); err != nil {
-			return fmt.Errorf("error writing CSV base: %v", err)
-		}
-	*/
 
 	// Write a kustomization.yaml to outputDir if one does not exist.
 	if err := kustomize.WriteIfNotExist(c.outputDir, manifestsKustomization); err != nil {

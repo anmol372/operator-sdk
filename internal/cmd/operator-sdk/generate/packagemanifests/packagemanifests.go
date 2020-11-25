@@ -78,11 +78,6 @@ https://github.com/operator-framework/operator-registry/#manifest-format
 const defaultRootDir = "packagemanifests"
 
 // setDefaults sets command defaults.
-<<<<<<< HEAD
-func (c *packagemanifestsCmd) setDefaults() (err error) {
-	if c.projectName, err = genutil.GetOperatorName(); err != nil {
-		return err
-=======
 func (c *packagemanifestsCmd) setDefaults() error {
 	if projutil.HasProjectFile() {
 		cfg, err := projutil.ReadConfig()
@@ -95,10 +90,9 @@ func (c *packagemanifestsCmd) setDefaults() error {
 		c.layout = projutil.GetProjectLayout(cfg)
 	} else {
 		if c.packageName == "" {
-			return fmt.Errorf("package name is required if PROJECT config file is not present")
+			return fmt.Errorf("--packageName must be set if PROJECT config file is not present")
 		}
 		c.layout = "unknown"
->>>>>>> dee3d8bc1869d8aeecb9966af9fc1ad22c8373bf
 	}
 
 	if c.inputDir == "" {
@@ -199,8 +193,6 @@ func (c packagemanifestsCmd) run() error {
 		opts = append(opts, gencsv.WithPackageWriter(c.outputDir))
 	}
 
-<<<<<<< HEAD
-=======
 	csvGen := gencsv.Generator{
 		OperatorName: c.packageName,
 		Version:      c.version,
@@ -208,7 +200,6 @@ func (c packagemanifestsCmd) run() error {
 		Collector:    col,
 		Annotations:  metricsannotations.MakeBundleObjectAnnotations(c.layout),
 	}
->>>>>>> dee3d8bc1869d8aeecb9966af9fc1ad22c8373bf
 	if err := csvGen.Generate(opts...); err != nil {
 		return fmt.Errorf("error generating ClusterServiceVersion: %v", err)
 	}
