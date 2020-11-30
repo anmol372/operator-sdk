@@ -90,7 +90,7 @@ func (c *packagemanifestsCmd) setDefaults() error {
 		c.layout = projutil.GetProjectLayout(cfg)
 	} else {
 		if c.packageName == "" {
-			return fmt.Errorf("--packageName must be set if PROJECT config file is not present")
+			return fmt.Errorf("--package name must be set if PROJECT config file is not present")
 		}
 		c.layout = "unknown"
 	}
